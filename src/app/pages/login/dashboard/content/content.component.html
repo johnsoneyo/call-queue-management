@@ -1,7 +1,29 @@
+<div class="content-container">
 <mat-tab-group class="tab-container">
-    <mat-tab label="Waiting "> 
-      
+  <mat-tab label="Queue Management">
+    <mat-divider></mat-divider>
+    <app-waiting></app-waiting>
+    <app-holding-bridge></app-holding-bridge>
+    <app-mixing-bridge></app-mixing-bridge>
+  </mat-tab>
+  <mat-tab label="Logs">
+ 
+  </mat-tab>
+  <mat-tab label="Metrics">
+
+  </mat-tab>
+  <mat-tab label="User Management">
+
     </mat-tab>
-    <mat-tab label="Bridged"> Content 2 </mat-tab>
-    <mat-tab label="Logging"> Content 3 </mat-tab>
-  </mat-tab-group>
+
+</mat-tab-group>
+<div class="extensions-nav">
+  <app-extension></app-extension>
+</div>
+
+<span class="done">
+  <button (click)="openSaveBridgeDialog()" mat-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+</span>
+<div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChannelsComponent } from './channels.component';
+import { SavebridgeComponent } from './savebridge.component';
 
-describe('ChannelsComponent', () => {
-  let component: ChannelsComponent;
-  let fixture: ComponentFixture<ChannelsComponent>;
+describe('SavebridgeComponent', () => {
+  let component: SavebridgeComponent;
+  let fixture: ComponentFixture<SavebridgeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChannelsComponent ]
+      declarations: [ SavebridgeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChannelsComponent);
+    fixture = TestBed.createComponent(SavebridgeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

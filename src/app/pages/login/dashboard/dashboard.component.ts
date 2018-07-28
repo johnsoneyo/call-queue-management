@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   {"id":197643,"fullname":"kenny mrcormick","extension":"1000"},
   {"id":174344,"fullname":"kyle  brovlaski","phone":"070876512651","extension":"1000"}];
 
-  constructor(private phoneService : PhoneService,private wsService : WebsocketService) { 
+  constructor(private phoneService : PhoneService) { 
    
   }
 

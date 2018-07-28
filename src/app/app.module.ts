@@ -19,12 +19,32 @@ import {MatMenuModule} from '@angular/material/menu';
 import {PhoneService} from './services/phone.service';
 import {HttpClientModule} from '@angular/common/http';
 import { WebsocketService } from './services/websocket.service';
-import { ChannelsComponent } from './pages/login/dashboard/channels/channels.component';
-import { BridgesComponent } from './pages/login/dashboard/bridges/bridges.component';
+
 import { LoggingComponent } from './pages/login/dashboard/logging/logging.component';
 import { HeaderComponent } from './pages/login/dashboard/header/header.component';
 import { ContentComponent } from './pages/login/dashboard/content/content.component';
 import { WsnotifierService } from './services/wsnotifier.service';
+import {MatTableModule} from '@angular/material/table';
+import { WaitingComponent } from './pages/login/dashboard/content/waiting/waiting.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { HoldingBridgeComponent } from './pages/login/dashboard/content/holding-bridge/holding-bridge.component';
+import { AriproxyService } from './services/ariproxy.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ng2DragDropModule } from 'ng2-drag-drop';
+import { Ng2DragDropService} from 'ng2-drag-drop/src/services/ng2-drag-drop.service';
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { SavebridgeComponent } from './pages/login/dashboard/content/savebridge/savebridge.component';
+import { ToastrModule, ToastrService, ToastContainerModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import { MixingBridgeComponent } from './pages/login/dashboard/content/mixing-bridge/mixing-bridge.component';
+import { ExtensionComponent } from './pages/login/dashboard/content/extension/extension.component';
+import { NotifierService } from './services/notifier.service';
+import { TreeModule } from 'angular-tree-component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { UsersComponent } from './pages/login/dashboard/content/users/users.component';
 
 
 
@@ -35,15 +55,33 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent,DashboardComponent, ChannelsComponent, BridgesComponent, LoggingComponent, HeaderComponent, ContentComponent
+    AppComponent,LoginComponent,
+    DashboardComponent, LoggingComponent, 
+    HeaderComponent, ContentComponent, WaitingComponent, 
+    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, UsersComponent,
   ],
-  imports: [MatInputModule,MatButtonModule,HttpClientModule,MatMenuModule,MatListModule,MatDividerModule,MatTabsModule,MatSidenavModule,MatToolbarModule,MatIconModule,
-    BrowserModule,BrowserAnimationsModule, MatCardModule,  RouterModule.forRoot(
+  imports: [MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,
+    MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,
+    MatListModule,MatDividerModule,MatTabsModule,MatDialogModule,CommonModule,MatMenuModule,
+    MatSidenavModule,MatToolbarModule,MatIconModule,ReactiveFormsModule,MatTooltipModule,
+    BrowserModule,BrowserAnimationsModule, MatSelectModule,ToastrModule.forRoot(),
+    MatCardModule, MatDividerModule, MatFormFieldModule,RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     )
   ],
-  providers: [PhoneService,WebsocketService,WsnotifierService],
+  entryComponents: [
+    SavebridgeComponent
+  ],
+  providers: [PhoneService,WebsocketService,Ng2DragDropService,
+    WsnotifierService,AriproxyService,ToastrService,NotifierService,
+     {provide: MAT_DIALOG_DEFAULT_OPTIONS,
+       useValue: {hasBackdrop: false}},{
+        provide: MAT_DIALOG_DATA,
+        useValue: {} // Add any data you wish to test if it is passed/used correctly
+      }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+platformBrowserDynamic().bootstrapModule(AppModule);

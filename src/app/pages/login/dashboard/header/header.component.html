@@ -1,9 +1,14 @@
 <mat-toolbar class="mat-elevation-z5" color="primary">
   <mat-toolbar-row>
-    <span>Call Queueing Management </span>  
+    <span>Call Queueing Management </span>
   </mat-toolbar-row>
   <mat-toolbar-row class="tab-under">
-      <span>{{connectionMsg}}</span>
-      <span><img width="50" height="50" src="{{connectionImg}}"></span>
+    <span>{{connectionMsg}}</span>
+    <span>
+      <img width="50" height="50" src="{{connectionImg}}">
+    </span>
+    <button mat-icon-button>
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
