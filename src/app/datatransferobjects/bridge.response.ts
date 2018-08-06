@@ -8,5 +8,5 @@ export class BridgeResponse {
     name : string;
     channels: string[];
     video_mode : string;
-  
+    nodes : any[];
 }

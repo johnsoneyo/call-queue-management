@@ -3,7 +3,7 @@
     <mat-table #table [dataSource]="dataSource">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>Bridge ID</mat-header-cell>
-            <mat-cell [attr.data-bridgeid]="element.id" (click)="check($event)"  [attr.data-bridgeid]="element.id" *matCellDef="let element"> {{element.id}} </mat-cell>
+            <mat-cell [attr.data-bridgeid]="element.id" [attr.data-bridgeid]="element.id" *matCellDef="let element"> {{element.id}} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->
@@ -16,7 +16,7 @@
         <ng-container matColumnDef="participants">
             <mat-header-cell *matHeaderCellDef> Participants </mat-header-cell>
             <mat-cell *matCellDef="let element"> 
-                <tree-root  [nodes]="nodes" [options]="options">
+                <tree-root  [nodes]="element.nodes" [options]="options">
                     <ng-template  #treeNodeTemplate let-node let-index="index">
                         <img matListAvatar width="20" [attr.data-bridgeid]="element.id" height="20" src="assets/img/avatar.jpg" alt="...">
                         <span>{{node.data.name}}</span>

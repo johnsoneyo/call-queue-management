@@ -15,16 +15,14 @@ import { TreeNode } from 'angular-tree-component/dist/defs/api';
 })
 export class HoldingBridgeComponent implements OnInit {
 
-  position="right";
+  position = "right";
 
-  nodes = [
-    { children: [] }];
+ 
 
   options: ITreeOptions = {
     actionMapping: {
       mouse: {
         click: (tree, node, $event) => {
-          console.log($event);
         },
       }, allowDrag: (node) => {
         return true;
@@ -45,20 +43,12 @@ export class HoldingBridgeComponent implements OnInit {
     });
 
     this.notifier.notifyBridgeOfParticipants.subscribe(data => {
-      let channel = {
-        id: data.id,
-        name: data.name
-      }
-      this.nodes[0]['children'].push(channel);
+      this.ariProxy.getBridges('holding').subscribe(brgs => {
+        this.dataSource = new HoldingBridgeDatasource(brgs);
+      });
     });
 
-    this.notifier.notifyParticpantsLeavingChannel.subscribe(data => {
-      let children = this.nodes[0]['children'].filter((e) => data.id != e.id);
-
-      this.nodes = [
-        { children: children }];
-
-    });
+   
 
   }
 

@@ -13,11 +13,15 @@ export class ExtensionComponent implements OnInit {
 
   endpoints : EndpointResponse[];
 
-  constructor(private service : NotifierService) { }
+  constructor(private service : NotifierService,private ariproxy : AriproxyService) { }
    ngOnInit() {
     this.service.notifyendpoints.subscribe(data => {
       this.endpoints  = data;
     });
+  }
+
+  dial(req : any){
+    this.ariproxy.originate(req).subscribe(data=>{});
   }
 
 }

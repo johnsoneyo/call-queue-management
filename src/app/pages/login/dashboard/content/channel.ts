@@ -12,6 +12,4 @@ export class channel {
      dialplan : dialplan;
      creationtime : Date;
      language : string;
-
-
 }

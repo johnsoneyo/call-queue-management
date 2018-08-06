@@ -8,10 +8,11 @@
         <span> {{end.state}} </span>
         <span class="demo-2"> -- {{end.technology}} </span>
       </p>
-      <button mat-icon-button>
-        <mat-icon>dialpad</mat-icon>
+      <button [disabled]="end.state != 'online'"  (click)="dial(end)" mat-icon-button>
+        <mat-icon>{{end.state == 'online' ? 'local_phone' : 'phone_paused'}}</mat-icon>
       </button>
-    </mat-list-item>
+      
+       </mat-list-item>
 
   </mat-nav-list>
 </div>

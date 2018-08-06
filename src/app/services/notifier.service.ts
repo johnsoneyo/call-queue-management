@@ -7,6 +7,7 @@ import { channel } from '../pages/login/dashboard/content/channel';
 @Injectable()
 export class NotifierService {
 
+
   public subject = new Subject<string>();
   public removeChannel = new Subject<any>();
   public notifyholdingBridgeCreation = new Subject<any>();
@@ -17,6 +18,7 @@ export class NotifierService {
   public notifyendpoints = new Subject<any>();
   public notifyBridgeOfParticipants = new Subject<any>();
   public notifyParticpantsLeavingChannel = new Subject<any>();
+  public notifyChannels = new Subject<any>();
 
   constructor() { }
 
@@ -51,6 +53,10 @@ export class NotifierService {
 
   setToastMsg(msg: string) {
     this.toastMsg.next(msg);
+  }
+
+  setNotifyChannels(channels : channel[]): any {
+    this.notifyChannels.next(channels);
   }
 
 

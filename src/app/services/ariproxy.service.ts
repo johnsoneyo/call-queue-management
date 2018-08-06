@@ -7,6 +7,8 @@ import { BridgeResponse } from '../datatransferobjects/bridge.response';
 import { EndpointResponse } from '../datatransferobjects/endpoint.response';
 import { WsnotifierService } from './wsnotifier.service';
 import { NotifierService } from './notifier.service';
+import { Payload } from '../datatransferobjects/payload';
+import { channel } from '../pages/login/dashboard/content/channel';
 
 @Injectable()
 export class AriproxyService {
@@ -29,6 +31,10 @@ export class AriproxyService {
     });
     this.getEndpoints().subscribe(data => {
       this.notifier.setNotifyExtension(data);
+    });
+
+    this.getChannels().subscribe(data => {
+      this.notifier.setNotifyChannels(data);
     });
 
 
@@ -76,6 +82,53 @@ export class AriproxyService {
     return this.http.
       post('http://localhost:8080/ari-proxy/bridges/' + bridgeId + '/' + channelId, options);
   }
+
+
+  originate(payload: Payload): Observable<any> {
+
+    let p = new Payload();
+    p.extension = "1002";
+    p.callerId = "crm-0001";
+    p.timeout = 120;
+    p.app = "hello-world";
+    p.endpoint = "SIP/astero";
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('http://localhost:8080/ari-proxy/channels', p, httpOptions);
+  }
+
+  getChannels(): Observable<channel[]> {
+    return this.http.
+      get<channel[]>('http://localhost:8080/ari-proxy/channels')
+  }
+
+  answerChannel(channelId) : Observable<any>{
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.
+      post('http://localhost:8080/ari-proxy/channels/'+channelId+'/answer',httpOptions);
+  }
+
+  ringChannel(channelId) : Observable<any>{
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.
+      post('http://localhost:8080/ari-proxy/channels/'+channelId+'/ring',httpOptions);
+  }
+
 
 
 }

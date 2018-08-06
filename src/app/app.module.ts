@@ -45,6 +45,8 @@ import { NotifierService } from './services/notifier.service';
 import { TreeModule } from 'angular-tree-component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { UsersComponent } from './pages/login/dashboard/content/users/users.component';
+import { WaitingAgentComponent } from './pages/login/dashboard/content/waiting-agent/waiting-agent.component';
+
 
 
 
@@ -55,10 +57,10 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,LoginComponent,
+    AppComponent,LoginComponent, 
     DashboardComponent, LoggingComponent, 
     HeaderComponent, ContentComponent, WaitingComponent, 
-    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, UsersComponent,
+    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, UsersComponent, WaitingAgentComponent,
   ],
   imports: [MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,
     MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,
@@ -71,7 +73,7 @@ const appRoutes: Routes = [
     )
   ],
   entryComponents: [
-    SavebridgeComponent
+    SavebridgeComponent,
   ],
   providers: [PhoneService,WebsocketService,Ng2DragDropService,
     WsnotifierService,AriproxyService,ToastrService,NotifierService,

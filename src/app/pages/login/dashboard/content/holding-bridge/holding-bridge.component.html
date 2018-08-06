@@ -17,7 +17,7 @@
         <ng-container matColumnDef="participants">
             <mat-header-cell *matHeaderCellDef> Participants </mat-header-cell>
             <mat-cell *matCellDef="let element">             
-                <tree-root [nodes]="nodes" [options]="options">
+                <tree-root [nodes]="element.nodes" [options]="options">
                     <ng-template #treeNodeTemplate let-node let-index="index">
                         <img matListAvatar width="20" height="20" src="assets/img/avatar.jpg" alt="...">
                         <span>{{node.data.name}}</span>
