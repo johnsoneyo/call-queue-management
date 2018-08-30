@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WaitingAgentComponent } from './waiting-agent.component';
+import { CallLogComponent } from './call-log.component';
 
-describe('WaitingAgentComponent', () => {
-  let component: WaitingAgentComponent;
-  let fixture: ComponentFixture<WaitingAgentComponent>;
+describe('CallLogComponent', () => {
+  let component: CallLogComponent;
+  let fixture: ComponentFixture<CallLogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WaitingAgentComponent ]
+      declarations: [ CallLogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WaitingAgentComponent);
+    fixture = TestBed.createComponent(CallLogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

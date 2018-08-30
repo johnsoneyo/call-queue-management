@@ -48,6 +48,7 @@ export class MixingBridgeComponent implements OnInit {
         },
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }) => {
 
+          console.log('trying to drop channe >>>>>>>>>>>>>>>>>>>>');
           let channelId;
           if (from.data == undefined) {
             channelId = from.id;
@@ -90,7 +91,6 @@ export class MixingBridgeComponent implements OnInit {
     },
     StasisEnd: () => { return },
     ChannelHangupRequest: () => { return }
-
   }
 
 

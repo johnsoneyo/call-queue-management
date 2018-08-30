@@ -19,6 +19,7 @@ export class NotifierService {
   public notifyBridgeOfParticipants = new Subject<any>();
   public notifyParticpantsLeavingChannel = new Subject<any>();
   public notifyChannels = new Subject<any>();
+  
 
   constructor() { }
 

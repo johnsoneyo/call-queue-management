@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContentComponent implements OnInit {
 
-  
+  isAdmin : boolean = false;
 
   constructor(public dialog: MatDialog,private toast : ToastrService,private ws : WsnotifierService) { }
 
@@ -24,7 +24,6 @@ export class ContentComponent implements OnInit {
        this.toast.error(data,'Error occured',{titleClass : 'titleclass',messageClass:'messageclass'});
      });
   }
-
 
   openSaveBridgeDialog(): void {
     let dialogRef = this.dialog.open(SavebridgeComponent, {

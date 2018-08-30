@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NotifierService } from '../../../../../services/notifier.service';
 import { ITreeOptions, TREE_ACTIONS, TreeModel } from 'angular-tree-component';
 import { TreeNode } from 'angular-tree-component/dist/defs/api';
+import { PlaybackResponse } from '../../../../../datatransferobjects/playback.response';
 
 @Component({
   selector: 'app-holding-bridge',
@@ -16,8 +17,8 @@ import { TreeNode } from 'angular-tree-component/dist/defs/api';
 export class HoldingBridgeComponent implements OnInit {
 
   position = "right";
+  isAdmin :  boolean = true;
 
- 
 
   options: ITreeOptions = {
     actionMapping: {
@@ -48,7 +49,7 @@ export class HoldingBridgeComponent implements OnInit {
       });
     });
 
-   
+
 
   }
 
@@ -67,5 +68,17 @@ export class HoldingBridgeComponent implements OnInit {
       });
 
   }
+
+  playMedia(id: string) {
+    this.ariProxy.playmediaInBridge(id).subscribe(data => {
+        this.toast.success('','playing beethoven in the  bridge');
+    });
+  }
+
+  deleteBridge(id : string ){
+    
+  }
+
+
 
 }

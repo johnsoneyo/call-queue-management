@@ -4,5 +4,6 @@ export class EndpointResponse {
     resource: string;
     state: string;
     channel_ids: string[];
+    currentChannel : {};
 
 }

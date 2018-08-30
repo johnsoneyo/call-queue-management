@@ -10,6 +10,7 @@ import { NotifierService } from '../../../../../services/notifier.service';
 })
 export class ExtensionComponent implements OnInit {
 
+  public currentChannel : {};
 
   endpoints : EndpointResponse[];
 

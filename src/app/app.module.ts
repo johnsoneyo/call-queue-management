@@ -20,7 +20,6 @@ import {PhoneService} from './services/phone.service';
 import {HttpClientModule} from '@angular/common/http';
 import { WebsocketService } from './services/websocket.service';
 
-import { LoggingComponent } from './pages/login/dashboard/logging/logging.component';
 import { HeaderComponent } from './pages/login/dashboard/header/header.component';
 import { ContentComponent } from './pages/login/dashboard/content/content.component';
 import { WsnotifierService } from './services/wsnotifier.service';
@@ -45,25 +44,29 @@ import { NotifierService } from './services/notifier.service';
 import { TreeModule } from 'angular-tree-component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { UsersComponent } from './pages/login/dashboard/content/users/users.component';
-import { WaitingAgentComponent } from './pages/login/dashboard/content/waiting-agent/waiting-agent.component';
-
+import { CallLogComponent } from './pages/login/dashboard/content/call-log/call-log.component';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './services/auth.service';
+import { RoleModule } from './role/role.module';
+import { ProfileComponent } from './pages/login/dashboard/content/profile/profile.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent }]
+  { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard] }]
 
 @NgModule({
   declarations: [
     AppComponent,LoginComponent, 
-    DashboardComponent, LoggingComponent, 
+    DashboardComponent, 
     HeaderComponent, ContentComponent, WaitingComponent, 
-    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, UsersComponent, WaitingAgentComponent,
+    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, UsersComponent, CallLogComponent, ProfileComponent,
   ],
-  imports: [MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,
-    MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,
+  imports: [MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,RoleModule,
+    MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,MatCheckboxModule,
     MatListModule,MatDividerModule,MatTabsModule,MatDialogModule,CommonModule,MatMenuModule,
     MatSidenavModule,MatToolbarModule,MatIconModule,ReactiveFormsModule,MatTooltipModule,
     BrowserModule,BrowserAnimationsModule, MatSelectModule,ToastrModule.forRoot(),
@@ -75,7 +78,7 @@ const appRoutes: Routes = [
   entryComponents: [
     SavebridgeComponent,
   ],
-  providers: [PhoneService,WebsocketService,Ng2DragDropService,
+  providers: [PhoneService,WebsocketService,Ng2DragDropService,AuthGuard,AuthService,
     WsnotifierService,AriproxyService,ToastrService,NotifierService,
      {provide: MAT_DIALOG_DEFAULT_OPTIONS,
        useValue: {hasBackdrop: false}},{

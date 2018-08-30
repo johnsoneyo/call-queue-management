@@ -9,6 +9,7 @@ import { WsnotifierService } from './wsnotifier.service';
 import { NotifierService } from './notifier.service';
 import { Payload } from '../datatransferobjects/payload';
 import { channel } from '../pages/login/dashboard/content/channel';
+import { PlaybackResponse } from '../datatransferobjects/playback.response';
 
 @Injectable()
 export class AriproxyService {
@@ -129,6 +130,10 @@ export class AriproxyService {
       post('http://localhost:8080/ari-proxy/channels/'+channelId+'/ring',httpOptions);
   }
 
+  playmediaInBridge(bridgeId : string) : Observable<PlaybackResponse>{
+    return this.http.
+    get<PlaybackResponse>('http://localhost:8080/ari-proxy/bridges/'+bridgeId+'/playmedia');
+  }
 
 
 }

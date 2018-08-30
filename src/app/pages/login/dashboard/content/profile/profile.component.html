@@ -1,0 +1,27 @@
+<div class="contain">
+  <mat-card class="container">
+    <mat-form-field>
+      <input matInput placeholder="Full Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email">
+    </mat-form-field>
+  </mat-card>
+  <mat-card  class="contain-card">
+    <mat-checkbox (click)="showPasswordCard()" >Change Password</mat-checkbox>
+  </mat-card>
+  <mat-card class="contain-card" *ngIf="passwordCard" >
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Confirm Password">
+    </mat-form-field>
+  </mat-card>
+  <mat-card class="contain-card">
+    <button mat-button>Update</button>
+  </mat-card>
+</div>
