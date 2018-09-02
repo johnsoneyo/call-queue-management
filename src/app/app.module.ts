@@ -43,7 +43,6 @@ import { ExtensionComponent } from './pages/login/dashboard/content/extension/ex
 import { NotifierService } from './services/notifier.service';
 import { TreeModule } from 'angular-tree-component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { UsersComponent } from './pages/login/dashboard/content/users/users.component';
 import { CallLogComponent } from './pages/login/dashboard/content/call-log/call-log.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './services/auth.service';
@@ -63,7 +62,7 @@ const appRoutes: Routes = [
     AppComponent,LoginComponent, 
     DashboardComponent, 
     HeaderComponent, ContentComponent, WaitingComponent, 
-    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, UsersComponent, CallLogComponent, ProfileComponent,
+    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, CallLogComponent, ProfileComponent,
   ],
   imports: [MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,RoleModule,
     MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,MatCheckboxModule,

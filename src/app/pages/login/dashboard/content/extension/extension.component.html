@@ -1,9 +1,10 @@
 <div class="extension-container">
   <mat-toolbar color="primary">Endpoints </mat-toolbar>
-  <mat-nav-list>
+  <mat-nav-list *ngIf="endpoints else loading">
     <mat-list-item *ngFor="let end of endpoints">
       <a matLine href="...">{{ end.resource }}</a>
-      <img [treeDrag]="end.currentChannel" [treeDragEnabled]="true" matListAvatar width="40" height="10" src="assets/img/avatar.jpg" alt="...">
+      <img [treeDrag]="{id : 5,name: 'first'}" [treeDragEnabled]="true" matListAvatar width="40" height="10" src="assets/img/avatar.jpg"
+        alt="...">
       <p matLine>
         <span> {{end.state}} </span>
         <span class="demo-2"> -- {{end.technology}} </span>
@@ -11,11 +12,14 @@
       <p *ngIf="end.currentChannel.id !=undefined">
         Ready to Talk (accepted channel)
       </p>
-      <button [disabled]="end.state != 'online'"  (click)="dial(end)" mat-icon-button>
+      <button [disabled]="end.state != 'online'" (click)="dial(end)" mat-icon-button>
         <mat-icon>{{end.state == 'online' ? 'local_phone' : 'phone_paused'}}</mat-icon>
       </button>
-      
-       </mat-list-item>
+
+    </mat-list-item>
 
   </mat-nav-list>
+  <ng-template #loading>
+    <img width="100%" height="100%" src="assets/img/giphy2.gif" />
+  </ng-template>
 </div>
