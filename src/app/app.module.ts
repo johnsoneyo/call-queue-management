@@ -49,6 +49,8 @@ import { AuthService } from './services/auth.service';
 import { RoleModule } from './role/role.module';
 import { ProfileComponent } from './pages/login/dashboard/content/profile/profile.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -69,7 +71,7 @@ const appRoutes: Routes = [
     MatListModule,MatDividerModule,MatTabsModule,MatDialogModule,CommonModule,MatMenuModule,
     MatSidenavModule,MatToolbarModule,MatIconModule,ReactiveFormsModule,MatTooltipModule,
     BrowserModule,BrowserAnimationsModule, MatSelectModule,ToastrModule.forRoot(),
-    MatCardModule, MatDividerModule, MatFormFieldModule,RouterModule.forRoot(
+    MatCardModule,MatProgressSpinnerModule, MatDividerModule,MatPaginatorModule,MatFormFieldModule,RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     )

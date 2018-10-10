@@ -38,7 +38,9 @@ export class HoldingBridgeComponent implements OnInit {
     private wsnotifier: WsnotifierService, private notifier: NotifierService) { }
 
   ngOnInit() {
-
+    this.ariProxy.getBridges('holding').subscribe(data => {
+      this.dataSource = new HoldingBridgeDatasource(data);
+    });
     this.notifier.notifyholdingBridgeCreation.subscribe(data => {
       this.dataSource = new HoldingBridgeDatasource(data);
     });
@@ -48,8 +50,6 @@ export class HoldingBridgeComponent implements OnInit {
         this.dataSource = new HoldingBridgeDatasource(brgs);
       });
     });
-
-
 
   }
 
@@ -76,7 +76,11 @@ export class HoldingBridgeComponent implements OnInit {
   }
 
   deleteBridge(id : string ){
-    
+    this.ariProxy.deleteBridge(id).subscribe(data =>{
+      this.ariProxy.getBridges('holding').subscribe(data => {
+        this.dataSource = new HoldingBridgeDatasource(data);
+      });
+    });
   }
 
 

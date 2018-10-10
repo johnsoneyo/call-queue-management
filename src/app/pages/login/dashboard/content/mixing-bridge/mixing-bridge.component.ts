@@ -7,6 +7,7 @@ import { BridgeRequest } from '../../../../../datatransferobjects/bridge-request
 import { NotifierService } from '../../../../../services/notifier.service';
 import { ITreeOptions, TreeModel, TREE_ACTIONS, TreeComponent } from 'angular-tree-component';
 import { TreeNode } from 'angular-tree-component/dist/defs/api';
+import { CallLog } from '../../../../../datatransferobjects/call-log';
 
 @Component({
   selector: 'app-mixing-bridge',
@@ -18,12 +19,16 @@ export class MixingBridgeComponent implements OnInit {
   @ViewChild(TreeComponent)
   private tree: TreeComponent;
 
-  
+  isAdmin = true;
+
   constructor(private ariProxy: AriproxyService, private toast: ToastrService,
     private wsnotifier: WsnotifierService, private notifier: NotifierService) { }
 
   ngOnInit() {
-    
+    this.ariProxy.getBridges('mixing').subscribe(data => {
+      this.dataSource = new MixingBridgeDatasource(data);
+    });
+
     this.notifier.notifymixingBridgeCreation.subscribe(data => {
       this.dataSource = new MixingBridgeDatasource(data);
     });
@@ -44,23 +49,38 @@ export class MixingBridgeComponent implements OnInit {
       mouse: {
         click: (tree, node, $event) => {
           console.log($event);
-          console.log($event);
         },
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }) => {
-
-          console.log('trying to drop channe >>>>>>>>>>>>>>>>>>>>');
           let channelId;
           if (from.data == undefined) {
             channelId = from.id;
+
+            let log = new CallLog();
+            log.destinationChannelId = channelId,
+              log.destination = "agent astero",
+              log.startTime = new Date();
+            this.ariProxy.createCallog(log).subscribe(data => {
+
+            });
+
           } else {
-           channelId = from.data.id;
+            channelId = from.data.id;
+
+            let log = new CallLog();
+            log.sourceChannelId = channelId,
+              log.source = "outside call"
+            log.startTime = new Date();
+            this.ariProxy.createCallog(log).subscribe(data => {
+
+            });
           }
           if ($event.target.dataset.bridgeid == undefined) {
             return;
           }
-         
+
           this.ariProxy.addChannelToBridge(channelId, $event.target.dataset.bridgeid).subscribe(data => {
-              this.notifier.setNotifyParticpantsLeavingChannel(undefined);
+            this.notifier.setNotifyParticpantsLeavingChannel(undefined);
+
           }, error => {
             this.toast.error('', 'Channel cannot be added ');
           });
@@ -76,7 +96,7 @@ export class MixingBridgeComponent implements OnInit {
     }
   };
 
-  displayedColumns: string[] = ['id', 'name', 'participants'];
+  displayedColumns: string[] = ['id', 'name', 'participants','actions'];
   dataSource: MixingBridgeDatasource;
 
 
@@ -94,10 +114,14 @@ export class MixingBridgeComponent implements OnInit {
   }
 
 
-  check($event) {
-    console.log($event.target.dataset.bridgeid);
-  }
 
+  deleteBridge(id : string){
+    this.ariProxy.deleteBridge(id).subscribe(data =>{
+      this.ariProxy.getBridges('mixing').subscribe(data => {
+        this.dataSource = new MixingBridgeDatasource(data);
+      });
+    });
+  }
 
 
 

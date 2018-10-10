@@ -1,12 +1,9 @@
 <mat-toolbar class="mat-elevation-z5" color="primary">
   <mat-toolbar-row>
-    <span>Call Queueing Management </span>
+    <span>J-Cally</span>
   </mat-toolbar-row>
   <mat-toolbar-row class="tab-under">
-    <span>
-      <img width="50" height="50" src="{{connectionImg}}">
-    </span>
-    <button mat-icon-button>
+    <button (click)="logout()" mat-icon-button>
       <mat-icon>power_settings_new</mat-icon>
     </button>
   </mat-toolbar-row>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AriproxyService } from '../../../../../services/ariproxy.service';
+import { CallLogDatasource } from './calllog-datasource';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-call-log',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CallLogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ariproxy: AriproxyService) { }
+
+  displayedColumns: string[] = ['source', 'destination', 'startTime', 'endTime', 'noOfParticipants', 'duration'];
+  dataSource: CallLogDatasource;
+
+   // MatPaginator Output
+  pageEvent: PageEvent;
 
   ngOnInit() {
+    this.ariproxy.getCallLogs(0).subscribe(data => {
+      this.dataSource = new CallLogDatasource(data);
+    });
+
   }
+
+  pageEventChange($event){
+    this.ariproxy.getCallLogs($event.pageIndex).subscribe(data => {
+      this.dataSource = new CallLogDatasource(data);
+    });
+  }
+  
 
 }

@@ -1,6 +1,8 @@
 <div class="login-container">
 <mat-card>
-<mat-card-title>Call Queue Management</mat-card-title>
+<mat-card-title>
+  J-Cally 
+</mat-card-title>
   <mat-card-content>
     <form class="example-form" [formGroup]="credentials" >
       <mat-form-field class="example-full-width">
@@ -13,8 +15,8 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button class="button-width" (click)="login(credentials)" mat-button color="primary">sign in</button>
-    <button class="button-width" mat-button color="primary">forget password</button>
+    <button class="button-width" [disabled]="!credentials.valid" (click)="login(credentials)" mat-raised-button color="primary">sign in</button>
+    <button class="button-width" mat-button color="primary">forgot password</button>
     </mat-card-actions>
 </mat-card>
 </div>

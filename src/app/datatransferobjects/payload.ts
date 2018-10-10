@@ -8,6 +8,8 @@ export class Payload {
   appArgs: string;
   callerId: string;
   timeout: number;
+  technology : string;
+  resource : string;
 
 
 }

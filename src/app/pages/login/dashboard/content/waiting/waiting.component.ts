@@ -6,6 +6,7 @@ import { AriproxyService } from '../../../../../services/ariproxy.service';
 import { ToastrService } from 'ngx-toastr';
 import { NotifierService } from '../../../../../services/notifier.service';
 import { channel } from '../channel';
+import { CallLog } from '../../../../../datatransferobjects/call-log';
 
 @Component({
   selector: 'app-waiting',
@@ -68,7 +69,8 @@ export class WaitingComponent implements OnInit {
     ApplicationReplaced: () => { console.log('application started'); },
     ChannelEnteredBridge: (message) => {
       //  this.notifier.setRemoveChannel(message.channel.id);
-      this.notifier.setParticipantEnteredNotifier(message);
+       this.notifier.setParticipantEnteredNotifier(message);
+       
     },
     ChannelLeftBridge: (message) => {
       this.notifier.setNotifyParticpantsLeavingChannel(message.channel);
@@ -96,10 +98,13 @@ export class WaitingComponent implements OnInit {
     }
     ,
     PlaybackStarted: (msg) => {
-
+    
     },
     PlaybackFinished: (msg) => {
-
+      this.toast.info('', 'music playback finished in bridge  '+msg.playback.target_uri);
+    },
+    BridgeDestroyed: (msg) => {
+     
     }
   }
 

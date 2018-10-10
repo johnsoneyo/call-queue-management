@@ -11,9 +11,7 @@ export class RoleDirective {
 
   ngOnInit() {
     // Use renderer to render the emelemt with styles
-    console.log(this.superAdmin)
     if (!this.superAdmin) {
-      console.log('hide',this.renderer,this.el.nativeElement);   
       this.renderer.setElementStyle(this.el.nativeElement, 'display', 'none');
     }
   }

@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { BridgeResponse } from '../datatransferobjects/bridge.response';
 import { EndpointResponse } from '../datatransferobjects/endpoint.response';
 import { channel } from '../pages/login/dashboard/content/channel';
+import { User } from '../datatransferobjects/user';
 
 @Injectable()
 export class NotifierService {
@@ -19,6 +20,7 @@ export class NotifierService {
   public notifyBridgeOfParticipants = new Subject<any>();
   public notifyParticpantsLeavingChannel = new Subject<any>();
   public notifyChannels = new Subject<any>();
+  public notifyUser = new Subject<any>();
   
 
   constructor() { }
@@ -58,6 +60,11 @@ export class NotifierService {
 
   setNotifyChannels(channels : channel[]): any {
     this.notifyChannels.next(channels);
+  }
+
+  setNotifyUser(user : User){
+    console.log('notifiing user on login >>>>>..')
+    this.notifyUser.next(user);
   }
 
 

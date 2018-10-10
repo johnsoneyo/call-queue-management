@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { WebsocketService } from '../../../../services/websocket.service';
 import { WsnotifierService } from '../../../../services/wsnotifier.service';
+import { AuthService } from '../../../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NotifierService } from '../../../../services/notifier.service';
+import { User } from '../../../../datatransferobjects/user';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-header',
@@ -9,22 +14,25 @@ import { WsnotifierService } from '../../../../services/wsnotifier.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public connectionMsg: string;
-  public connectionImg: string;
+  public user: User;
+  
 
-  constructor(private ws: WsnotifierService, private w: WebsocketService) {
+  constructor(
+    private route: ActivatedRoute,
+    private ws: WsnotifierService,
+    private w: WebsocketService,
+    private auth: AuthService,
+    private router: Router) {
     this.w.externalCreateObservableSocket();
-
   }
 
   ngOnInit() {
-    this.ws.subject.subscribe(data => {
-      this.connectionImg = 'assets/img/green.png';
-      this.connectionMsg = 'Online : 192.168.1.10';
-    }, (error) => {
-      this.connectionImg = 'assets/img/red.png';
-      this.connectionMsg = 'Offline';
-    });
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/']);
   }
 
 }

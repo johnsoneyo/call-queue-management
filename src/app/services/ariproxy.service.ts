@@ -10,6 +10,8 @@ import { NotifierService } from './notifier.service';
 import { Payload } from '../datatransferobjects/payload';
 import { channel } from '../pages/login/dashboard/content/channel';
 import { PlaybackResponse } from '../datatransferobjects/playback.response';
+import { User } from '../datatransferobjects/user';
+import { CallLog } from '../datatransferobjects/call-log';
 
 @Injectable()
 export class AriproxyService {
@@ -24,20 +26,14 @@ export class AriproxyService {
     return this.http.post('http://localhost:8080/ari-proxy/bridges', bridge, options);
   }
   constructor(private http: HttpClient, private notifier: NotifierService) {
-    this.getBridges('holding').subscribe(data => {
-      this.notifier.setNotifyholdingOnBridgeCreation(data);
-    });
+
     this.getBridges('mixing').subscribe(data => {
       this.notifier.setNotifymixingOnBridgeCreation(data);
-    });
-    this.getEndpoints().subscribe(data => {
-      this.notifier.setNotifyExtension(data);
     });
 
     this.getChannels().subscribe(data => {
       this.notifier.setNotifyChannels(data);
     });
-
 
   }
 
@@ -69,7 +65,9 @@ export class AriproxyService {
 
   getEndpoints(): Observable<EndpointResponse[]> {
     return this.http.
-      get<EndpointResponse[]>('http://localhost:8080/ari-proxy/endpoints')
+      get<EndpointResponse[]>('http://localhost:8080/ari-proxy/endpoints').map(res => {
+        return res.filter(e => e.resource != 'public');
+      })
 
   }
 
@@ -88,11 +86,11 @@ export class AriproxyService {
   originate(payload: Payload): Observable<any> {
 
     let p = new Payload();
-    p.extension = "1002";
+    p.extension = "1000";
     p.callerId = "crm-0001";
     p.timeout = 120;
     p.app = "hello-world";
-    p.endpoint = "SIP/astero";
+    p.endpoint = payload.technology + "/" + payload.resource;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -108,7 +106,7 @@ export class AriproxyService {
       get<channel[]>('http://localhost:8080/ari-proxy/channels')
   }
 
-  answerChannel(channelId) : Observable<any>{
+  answerChannel(channelId): Observable<any> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -116,10 +114,10 @@ export class AriproxyService {
       })
     };
     return this.http.
-      post('http://localhost:8080/ari-proxy/channels/'+channelId+'/answer',httpOptions);
+      post('http://localhost:8080/ari-proxy/channels/' + channelId + '/answer', httpOptions);
   }
 
-  ringChannel(channelId) : Observable<any>{
+  ringChannel(channelId): Observable<any> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -127,13 +125,49 @@ export class AriproxyService {
       })
     };
     return this.http.
-      post('http://localhost:8080/ari-proxy/channels/'+channelId+'/ring',httpOptions);
+      post('http://localhost:8080/ari-proxy/channels/' + channelId + '/ring', httpOptions);
   }
 
-  playmediaInBridge(bridgeId : string) : Observable<PlaybackResponse>{
+  playmediaInBridge(bridgeId: string): Observable<PlaybackResponse> {
     return this.http.
-    get<PlaybackResponse>('http://localhost:8080/ari-proxy/bridges/'+bridgeId+'/playmedia');
+      get<PlaybackResponse>('http://localhost:8080/ari-proxy/bridges/' + bridgeId + '/playmedia');
   }
 
+  login(user): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<User>('http://localhost:8080/auth', user, httpOptions);
+  }
+
+  createCallog(log: CallLog): Observable<CallLog> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<CallLog>('http://localhost:8080/ari-proxy/calls', log, httpOptions);
+  }
+
+  updateCallog(log: CallLog): Observable<CallLog> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<CallLog>('http://localhost:8080/ari-proxy/calls', log, httpOptions);
+  }
+
+  getCallLogs(pageNo: number): Observable<CallLog[]> {
+    return this.http.get<any>('http://localhost:8080/ari-proxy/calls/' + pageNo).map(res => {
+      return res[0]['content'];
+    });
+  }
+
+  deleteBridge(bridgeId: string): Observable<any> {
+    return this.http.delete('http://localhost:8080/ari-proxy/bridges/' + bridgeId);
+  }
 
 }
