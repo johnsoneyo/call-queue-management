@@ -14,9 +14,14 @@
 
     
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Callers Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.caller.name ? element.caller.name:'unidentified'}} </mat-cell>
     </ng-container>
+
+    <ng-container matColumnDef="number">
+        <mat-header-cell *matHeaderCellDef> Number </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.caller.number}} </mat-cell>
+      </ng-container>
 
     <ng-container matColumnDef="weight">
       <mat-header-cell *matHeaderCellDef> State </mat-header-cell>

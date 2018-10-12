@@ -26,7 +26,7 @@ export class WaitingComponent implements OnInit {
 
   messages: OnMessage[];
   channels: channel[];
-  displayedColumns: string[] = ['status', 'position', 'name', 'weight', 'time', 'symbol'];
+  displayedColumns: string[] = ['status', 'position', 'name','number', 'weight', 'time', 'symbol'];
   dataSource: WaitingDataSource;
   greencicle: string = "assets/img/green.png";
   redcicle: string = "assets/img/red.png";

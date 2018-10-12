@@ -32,8 +32,12 @@
                 <button class="mat-elevation-z1" [disabled]="element.nodes[0]['children'] < 1" (click)="playMedia(element.id)" mat-mini-fab>
                     <mat-icon>play_arrow</mat-icon>
                 </button>
-                <button  [superAdmin]="isAdmin" matTooltip="deletes bridge " class="mat-elevation-z1" (click)="deleteBridge(element.id)" mat-mini-fab>
+                <button [superAdmin]="isAdmin" matTooltip="deletes bridge " class="mat-elevation-z1" (click)="deleteBridge(element.id)" mat-mini-fab>
                     <mat-icon>cancel</mat-icon>
+                </button>
+              
+                <button matTooltip="view details " class="mat-elevation-z1"  mat-mini-fab>
+                    <mat-icon>info</mat-icon>
                 </button>
             </mat-cell>
         </ng-container>

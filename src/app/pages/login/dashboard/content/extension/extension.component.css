@@ -11,3 +11,10 @@
     height: 24px;
     transform: scale(2);
 }
+
+.center {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}

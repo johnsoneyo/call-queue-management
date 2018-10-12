@@ -51,7 +51,7 @@ import { ProfileComponent } from './pages/login/dashboard/content/profile/profil
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {NgxPopperModule} from 'ngx-popper';
 
 
 
@@ -66,7 +66,7 @@ const appRoutes: Routes = [
     HeaderComponent, ContentComponent, WaitingComponent, 
     HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, CallLogComponent, ProfileComponent,
   ],
-  imports: [MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,RoleModule,
+  imports: [NgxPopperModule,MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,RoleModule,
     MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,MatCheckboxModule,
     MatListModule,MatDividerModule,MatTabsModule,MatDialogModule,CommonModule,MatMenuModule,
     MatSidenavModule,MatToolbarModule,MatIconModule,ReactiveFormsModule,MatTooltipModule,
