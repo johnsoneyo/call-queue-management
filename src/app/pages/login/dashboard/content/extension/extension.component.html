@@ -14,7 +14,7 @@
         <span class="demo-2"> -- {{end.technology}} </span>
       </p>
       <p *ngIf="end.currentChannel.id !=undefined">
-        Ready to Talk (accepted channel)
+        <mat-icon matTooltip="agent channel is active ">chat</mat-icon>
       </p>
       <button [disabled]="end.state != 'online'" (click)="dial(end)" mat-icon-button>
         <mat-icon>{{end.state == 'online' ? 'local_phone' : 'phone_paused'}}</mat-icon>

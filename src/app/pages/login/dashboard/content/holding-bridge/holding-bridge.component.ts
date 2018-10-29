@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AriproxyService } from '../../../../../services/ariproxy.service';
 import { BridgeRequest } from '../../../../../datatransferobjects/bridge-request';
 import { HoldingBridgeDatasource } from './holding.bridge.datasource';
@@ -9,6 +9,7 @@ import { ITreeOptions, TREE_ACTIONS, TreeModel } from 'angular-tree-component';
 import { TreeNode } from 'angular-tree-component/dist/defs/api';
 import { PlaybackResponse } from '../../../../../datatransferobjects/playback.response';
 
+
 @Component({
   selector: 'app-holding-bridge',
   templateUrl: './holding-bridge.component.html',
@@ -18,6 +19,8 @@ export class HoldingBridgeComponent implements OnInit {
 
   position = "right";
   isAdmin :  boolean = true;
+  @Output()
+  viewBridgeEmitter : EventEmitter<string>  = new EventEmitter();
 
 
   options: ITreeOptions = {
@@ -83,6 +86,9 @@ export class HoldingBridgeComponent implements OnInit {
     });
   }
 
+  openBridgeNav(id : string){
+    this.viewBridgeEmitter.next(id);
+  }
 
 
 }

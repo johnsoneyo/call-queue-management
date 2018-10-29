@@ -12,7 +12,7 @@ export class CallLogComponent implements OnInit {
 
   constructor(private ariproxy: AriproxyService) { }
 
-  displayedColumns: string[] = ['source', 'destination', 'startTime', 'endTime', 'noOfParticipants', 'duration'];
+  displayedColumns: string[] = ['source', 'destination','date', 'startTime', 'endTime', 'noOfParticipants', 'duration'];
   dataSource: CallLogDatasource;
 
    // MatPaginator Output

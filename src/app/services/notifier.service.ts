@@ -21,6 +21,7 @@ export class NotifierService {
   public notifyParticpantsLeavingChannel = new Subject<any>();
   public notifyChannels = new Subject<any>();
   public notifyUser = new Subject<any>();
+  public viewBridgeDetail = new Subject<any>();
   
 
   constructor() { }
@@ -63,9 +64,11 @@ export class NotifierService {
   }
 
   setNotifyUser(user : User){
-    console.log('notifiing user on login >>>>>..')
-    this.notifyUser.next(user);
+     this.notifyUser.next(user);
   }
 
+  setViewBridgeDetail(id : string){
+    this.viewBridgeDetail.next(id);
+  }
 
 }

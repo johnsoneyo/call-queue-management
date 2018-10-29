@@ -51,8 +51,10 @@ import { ProfileComponent } from './pages/login/dashboard/content/profile/profil
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {NgxPopperModule} from 'ngx-popper';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import { BridgeDetailsComponent } from './pages/login/dashboard/content/bridge-details/bridge-details.component';
+import { ChartsModule } from 'ng2-charts';
+import { MetricsComponent } from './pages/login/dashboard/content/metrics/metrics.component';
 
 
 const appRoutes: Routes = [
@@ -64,13 +66,13 @@ const appRoutes: Routes = [
     AppComponent,LoginComponent, 
     DashboardComponent, 
     HeaderComponent, ContentComponent, WaitingComponent, 
-    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, CallLogComponent, ProfileComponent,
+    HoldingBridgeComponent, SavebridgeComponent, MixingBridgeComponent, ExtensionComponent, CallLogComponent, ProfileComponent, BridgeDetailsComponent, MetricsComponent,
   ],
-  imports: [NgxPopperModule,MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,RoleModule,
+  imports: [MatExpansionModule,MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,RoleModule,
     MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,MatCheckboxModule,
     MatListModule,MatDividerModule,MatTabsModule,MatDialogModule,CommonModule,MatMenuModule,
     MatSidenavModule,MatToolbarModule,MatIconModule,ReactiveFormsModule,MatTooltipModule,
-    BrowserModule,BrowserAnimationsModule, MatSelectModule,ToastrModule.forRoot(),
+    BrowserModule,BrowserAnimationsModule, MatSelectModule,ToastrModule.forRoot(),ChartsModule,
     MatCardModule,MatProgressSpinnerModule, MatDividerModule,MatPaginatorModule,MatFormFieldModule,RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only

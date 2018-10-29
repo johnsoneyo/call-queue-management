@@ -7,4 +7,5 @@ export class CallLog {
     source: string;
     sourceChannelId: string;
     startTime: Date;
+    day : string;
 }

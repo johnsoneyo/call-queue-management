@@ -8,6 +8,7 @@ import { AriproxyService } from '../../../../services/ariproxy.service';
 import { BridgeRequest } from '../../../../datatransferobjects/bridge-request';
 import { ToastrService } from 'ngx-toastr';
 import { ThemePalette } from '@angular/material/core';
+import { NotifierService } from '../../../../services/notifier.service';
 
 @Component({
   selector: 'app-content',
@@ -17,9 +18,20 @@ import { ThemePalette } from '@angular/material/core';
 export class ContentComponent implements OnInit {
 
   isAdmin: boolean = false;
- 
+  isViewed: boolean = false;
 
-  constructor(public dialog: MatDialog, private toast: ToastrService, private ws: WsnotifierService) { }
+  constructor(public dialog: MatDialog,private notfie : NotifierService, private toast: ToastrService, private ws: WsnotifierService) {
+
+  }
+
+  showNavView($event) {
+    this.isViewed = true;
+    this.notfie.setViewBridgeDetail($event);
+  }
+
+  closing() {
+    this.isViewed = false;
+  }
 
   ngOnInit() {
     this.ws.toastMsg.subscribe(data => {
